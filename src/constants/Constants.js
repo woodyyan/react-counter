@@ -1,0 +1,1 @@
+let INIT_COUNTER_SIZE = 2

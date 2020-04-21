@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Counter from './Counter'
+import INIT_COUNTER_SIZE from '../constants/Constants'
 
 export default class CounterGroup extends Component {
     constructor(props) {
@@ -9,7 +10,7 @@ export default class CounterGroup extends Component {
         this.onChange = this.onChange.bind(this)
 
         this.state = {
-            size: 2
+            size: INIT_COUNTER_SIZE
         }
     }
 
@@ -25,15 +26,15 @@ export default class CounterGroup extends Component {
     }
 
     render() {
-        let counters = this.initArray(this.state.size)
+        let counters = this.initArray(this.props.size)
         return (
             <div>
-                <form>
+                {/* <form>
                     <input type="text" onChange={this.onChange} value={this.state.size}/>
-                </form>
+                </form> */}
                 {
-                    counters.map(value => (
-                        <Counter key={value}/>
+                    counters.map((value, index) => (
+                        <Counter key={value} index={index}/>
                     ))
                 }
             </div>
