@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Counter from './Counter'
-import INIT_COUNTER_SIZE from '../constants/Constants'
+import CounterApi from '../apis/CounterAPI'
 
 export default class CounterGroup extends Component {
     constructor(props) {
@@ -10,7 +10,7 @@ export default class CounterGroup extends Component {
         this.onChange = this.onChange.bind(this)
 
         this.state = {
-            size: INIT_COUNTER_SIZE
+            size: 2
         }
     }
 
@@ -25,13 +25,22 @@ export default class CounterGroup extends Component {
         return Array.from(Array(size).keys())
     }
 
+    componentDidMount() {
+        CounterApi.getCounterSize().then(response => {
+            const size = response.data.size
+            this.setState({
+                size: size
+            })
+        })
+    }
+
     render() {
-        let counters = this.initArray(this.props.size)
+        let counters = this.initArray(this.state.size)
         return (
             <div>
-                {/* <form>
+                <form>
                     <input type="text" onChange={this.onChange} value={this.state.size}/>
-                </form> */}
+                </form>
                 {
                     counters.map((value, index) => (
                         <Counter key={value} index={index}/>

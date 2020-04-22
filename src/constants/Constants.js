@@ -1,1 +1,1 @@
-let INIT_COUNTER_SIZE = 2
+const INIT_COUNTER_SIZE = 2
